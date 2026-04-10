@@ -1,37 +1,46 @@
-import React from 'react';
+import 'react-native-gesture-handler';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
-import HomeScreen from '.src/screens/HomeScreen.js';
-import PerfilScreen from '.src/screens/PerfilScreen.js';
-import ConfigScreen from '.src/screens/ConfigScreen.js';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
-const Tab = createBottomTabNavigator();
+import HomeScreen from './src/screens/HomeScreen';
+import PerfilScreen from './src/screens/PerfilScreen';
+import ConfigScreen from './src/screens/ConfigScreen';
+
+const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={{
-          tabBarActiveTintColor: '#1e40af',
-          tabBarInactiveTintColor: '#64748b',
-          headerShown: false, // Esconde o cabeçalho padrão para usar o seu design
-        }}
-      >
-        <Tab.Screen 
-          name="Home" 
-          component={HomeScreen} 
-          options={{ title: 'Início' }}
-        />
-        <Tab.Screen 
-          name="Perfil" 
-          component={PerfilScreen} 
-          options={{ title: 'Perfil' }}
-        />
-        <Tab.Screen 
-          name="Config" 
-          component={ConfigScreen} 
-          options={{ title: 'Ajustes' }}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <NavigationContainer>
+        <Drawer.Navigator
+          initialRouteName="Home"
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: '#1e40af',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            drawerActiveTintColor: '#1e40af',
+            drawerActiveBackgroundColor: '#dbeafe',
+            drawerInactiveTintColor: '#334155',
+            drawerLabelStyle: {
+              fontSize: 16,
+              fontWeight: '500',
+            },
+            drawerStyle: {
+              backgroundColor: '#f8fafc',
+              width: 260,
+            },
+          }}
+        >
+          <Drawer.Screen name="Home" component={HomeScreen} />
+          <Drawer.Screen name="Perfil" component={PerfilScreen} />
+          <Drawer.Screen name="Configurações" component={ConfigScreen} />
+        </Drawer.Navigator>
+      </NavigationContainer>
+    </GestureHandlerRootView>
   );
 }
