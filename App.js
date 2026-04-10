@@ -1,20 +1,37 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import HomeScreen from '.src/screens/HomeScreen.js';
+import PerfilScreen from '.src/screens/PerfilScreen.js';
+import ConfigScreen from '.src/screens/ConfigScreen.js';
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={{
+          tabBarActiveTintColor: '#1e40af',
+          tabBarInactiveTintColor: '#64748b',
+          headerShown: false, // Esconde o cabeçalho padrão para usar o seu design
+        }}
+      >
+        <Tab.Screen 
+          name="Home" 
+          component={HomeScreen} 
+          options={{ title: 'Início' }}
+        />
+        <Tab.Screen 
+          name="Perfil" 
+          component={PerfilScreen} 
+          options={{ title: 'Perfil' }}
+        />
+        <Tab.Screen 
+          name="Config" 
+          component={ConfigScreen} 
+          options={{ title: 'Ajustes' }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
